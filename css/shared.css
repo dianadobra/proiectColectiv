@@ -1,3 +1,7 @@
 .title{
   padding-right: 65px;
 }
+
+.smaller_font_weight{
+  font-weight: 400;
+}
