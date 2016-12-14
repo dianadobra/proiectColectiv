@@ -60,52 +60,8 @@
     <h4>
       Choose documents to start the flow: 
     </h4>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 1 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
+    <div class = "col-md-12 document_list">
     </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 2 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 3 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 4 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 5 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <br/>
     <div class="pull-left">
       <button type="button" class="btn btn-default workflow_button">Start Workflow</button>
     </div>
@@ -114,12 +70,48 @@
     <h4>
       Or upload new document: 
     </h4>
-    <button type="button" 
-            class="btn btn-default upload_button" 
-            onclick="redirectToUploadPage()">Upload document
-    </button>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
   </div>
 </div>
+
+<script>
+  var http = new XMLHttpRequest();
+  let user = jQuery.parseJSON(sessionStorage.getItem("loginCredentials"));
+  console.log(user[6]);
+  var url = "http://localhost:8080/eppione/api/documents/user/" + user[6];
+  //var params = "username=" + username + "&password=" + password;
+  http.open("GET", url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+  http.send();
+  //let json = JSON.parse(http.responseText);
+  //console.log(http.responseText);
+
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+    if (http.readyState == 4 && http.status == 200) {
+
+      // save the response as a string in sessionStorage
+      sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
+      let json = JSON.parse(http.responseText);
+
+      for (var i = 0; i < json.length; i++){
+
+          $(".document_list").append("<div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>" + json[i].name + "</label> </div><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default'>Delete</button></div></div>");
+      }
+      //console.log(JSON.stringify(json));
+      //role = json.roles[0].name;
+
+      
+    }
+  }
+</script>
 
 </body>
 </html>
