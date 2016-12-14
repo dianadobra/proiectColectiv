@@ -5,3 +5,7 @@
 .smaller_font_weight{
   font-weight: 400;
 }
+
+#upload-btn {
+  margin-left: 165px;
+}

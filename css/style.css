@@ -137,3 +137,9 @@ body:before {
   transform: translateX(-50%) translateY(-50%);
 }
 
+.invalid-login {
+  display: inline-block;
+  color: red;
+  margin-top: 20px;
+  font-size: 23px;
+}

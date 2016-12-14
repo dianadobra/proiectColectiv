@@ -3,10 +3,10 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+<link rel="stylesheet" href="css/shared.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<script src="js/uploadDocument.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <br/>
@@ -19,28 +19,21 @@ Upload a document
 </h3>
 <br><br>
 <div class="col-md-4 col-md-offset-1">
-  
-  <div class ="input-group">
-  <span class="input-group-addon" id="input_version">Version</span>
-  <input type="text" class="form-control" placeholder="Version" aria-describedby="input_version">
-  </div>
-  
-  
   <br>
   <div class="input-group">
-  <span class="input-group-addon" id="input_abstract">Abstract</span>
-  <input type="text" class="form-control" placeholder="Abstract" aria-describedby="input_abstract">
+  <span class="input-group-addon" id="abstract">Abstract</span>
+  <input type="text" id="input_abstract" class="form-control" placeholder="Abstract" aria-describedby="abstract">
   </div>
   <br>
   <div class="input-group">
-  <span class="input-group-addon" id="input_keywords">Keywords</span>
-  <input type="text" class="form-control" placeholder="Keywords" aria-describedby="input_keywords">
+  <span class="input-group-addon" id="keywords">Keywords</span>
+  <input type="text" id="input_keywords" class="form-control" placeholder="Keywords" aria-describedby="keywords">
   </div>
 </div>
 <div class="col-md-7">
   <div class="col-md-2 col-md-offset-4">Download Template</div>
   <div class="col-md-3">
-    <button type="button" class="btn btn-default " id="download_button">Download</button>
+    <button type="button" class="btn btn-default " id="download_button" onclick="downloadDocument()">Download</button>
   </div>
 
 </div>
@@ -48,16 +41,20 @@ Upload a document
 <div class="col-md-7">
   <div class="col-md-2 col-md-offset-4">Upload File</div>
   <div class="col-md-3">
-    <button type="button" class="btn btn-default" id="upload_button">Upload</button>
+    <input type="file" id="uploadfile" name="uploadfile" />
   </div>
 
 </div>
 <br><br><br>
 <div class="col-md-7">
-  <div class="col-md-offset-5">
-    <button type="button" class="btn btn-default" id="save_button">Save</button>
+  <div class="col-md-offset-12">
+    <input type="button" id="upload-btn" class="btn btn-default" value="Upload" onclick="uploadDocument()" />
   </div>
 
 </div>
 
 </div>
+
+<script>
+  console.log(localStorage.getItem("loginCredentials"));
+</script>

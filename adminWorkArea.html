@@ -12,6 +12,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script src="https://use.fontawesome.com/2b961c07ac.js"></script>
+<script src="js/uploadDocument.js"></script> 
+<script src="js/logOut.js"></script>
 <link rel="stylesheet" href="css/shared.css">  
 
 <br/>
@@ -22,7 +24,10 @@
     <a href="javascript:void(0);">Welcome</a>
   </li>
   <li class="list-group-item">
-    <a href="adminWorkArea.html">Work area</a>
+    <a href="javascript:void(0);">
+      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+      Work area
+    </a>
   </li>
   <li class="list-group-item">
     <a href="javascript:void(0);">Initiated tasks</a>
@@ -37,13 +42,10 @@
     <a href="javascript:void(0);">Users</a>
   </li>
   <li class="list-group-item">
-    <a href="admin.html">
-      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-      Logs
-    </a>
+    <a href="javascript:void(0);">Logs</a>
   </li>
   <li class="list-group-item">
-    <a href="javascript:void(0);">Log Out</a>
+    <a href="javascript:void(0);" onclick="logOut()">Log Out</a>
   </li>
 </ul>
 </div>
@@ -112,9 +114,10 @@
     <h4>
       Or upload new document: 
     </h4>
-    <a href="uploadDocument.html">
-    	<button type="button" class="btn btn-default upload_button">Upload document</button>
-    </a>
+    <button type="button" 
+            class="btn btn-default upload_button" 
+            onclick="redirectToUploadPage()">Upload document
+    </button>
   </div>
 </div>
 
