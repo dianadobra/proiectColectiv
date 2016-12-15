@@ -11,6 +11,7 @@ function downloadDocument() {
 function uploadDocument() {
 	var file = document.getElementById("uploadfile");
 	var loginCredentials = localStorage.getItem("loginCredentials");
+	console.log(loginCredentials);
 	var obj = JSON.parse(loginCredentials);
 	var i = 7;
 	var authorId = obj[6];

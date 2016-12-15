@@ -17,8 +17,7 @@
 
 <link rel="stylesheet" href="css/contributor.css">  
 <link rel="stylesheet" href="css/shared.css">  
-<script src="js/uploadDocument.js"></script> 
-<script src="js/logOut.js"></script>  
+<script src="js/uploadDocument.js"></script>  
 
 <br/>
 <br/>
@@ -30,7 +29,6 @@
   </li>
   <li class="list-group-item">
     <a href="javascript:void(0);">
-      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
       Work area
     </a>
   </li>
@@ -47,11 +45,11 @@
     <a href="javascript:void(0);">Statistics</a>
   </li>
   <li class="list-group-item">
-    <a href="javascript:void(0);" onclick="logOut()">Log Out</a>
+    <a href="javascript:void(0);">Log Out</a>
   </li>
 </ul>
 </div>
-
+<!--
 <div class="col-md-9">
   <h3 class="text-center title">
     Work area
@@ -79,11 +77,51 @@
     </a>
   </div>
 </div>
+-->
+<div class= "col-md-9">
+  <h3 class="text-center title">
+    Work area
+  </h3>
+  
+  
+  <br/>
 
+
+  <table class="table table-striped input_table">
+  <thead>
+    <tr>
+      <th>Name
+      <th>Abstract input
+      <th>Keywords
+      <th>Signed
+      <th>Signed by
+      <th>Document State
+      <th>Version
+      <th>Approval Status
+      <th>Username
+      <th>Signed by name
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+  </table>
+
+  <div class="text-center upload_doc">
+    <h4>
+      Or upload new document: 
+    </h4>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
+  </div>
+</div>
 <script>
   var http = new XMLHttpRequest();
   let user = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
-  //console.log(user[6]);
+  console.log(user[6]);
   var url = "http://localhost:8080/eppione/api/documents/user/" + user[6];
   //var params = "username=" + username + "&password=" + password;
   http.open("GET", url, true);
@@ -92,7 +130,7 @@
   http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   
   http.send();
-  //let json = JSON.parse(http.responseText);
+  //let json = JSON.parsehttp(.responseText);
   //console.log(http.responseText);
 
 
@@ -100,12 +138,13 @@
     if (http.readyState == 4 && http.status == 200) {
 
       // save the response as a string in sessionStorage
-      //localStorage.setItem("userFiles",JSON.stringify(http.responseText));
+      localStorage.setItem("userFiles",JSON.stringify(http.responseText));
       let json = JSON.parse(http.responseText);
 
       for (var i = 0; i < json.length; i++){
 
-          $(".document_list").append("<div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>" + json[i].name + "</label> </div><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default'>Delete</button></div></div>");
+          
+          $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedBy + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username + "<th>" + json[i].signedByName +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default'>Delete</button></div></div> " +"</tr>");
       }
       //console.log(JSON.stringify(json));
       //role = json.roles[0].name;
