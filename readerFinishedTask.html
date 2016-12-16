@@ -12,7 +12,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script src="https://use.fontawesome.com/2b961c07ac.js"></script>
+<script src="js/uploadDocument.js"></script>
 <script src="js/logOut.js"></script> 
 
 <link rel="stylesheet" href="css/contributor.css">  
@@ -26,10 +28,7 @@
     <a href="javascript:void(0);">Welcome</a>
   </li>
   <li class="list-group-item">
-    <a href="javascript:void(0);">
-      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
-      Work area
-    </a>
+    <a href="reader.html">Work area</a>
   </li>
   <li class="list-group-item">
     <a href="readerInitiatedTask.html">Initiated tasks</a>
@@ -38,38 +37,74 @@
     <a href="readerTask.html">Tasks area</a>
   </li>
   <li class="list-group-item">
-    <a href="readerFinishedTask.html">Finished tasks</a>
+    <a href="javascript:void(0);">
+      <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+      Finished tasks
+    </a>
   </li>
   <li class="list-group-item">
     <a href="javascript:void(0);">Statistics</a>
   </li>
   <li class="list-group-item">
-    <a href="javascript:void(0);" onclick="logOut()">Log Out</a>
+    <a href="javascript:void(0);">Log Out</a>
   </li>
 </ul>
 </div>
 
-<div class="col-md-9">
+<div class="col-md-10">
   <h3 class="text-center title">
-    Work area
+    Finished tasks area
   </h3>
   <br/>
   <br/>
-  <div class="col-md-6">
-    <h4>
-      The list of unused documents:
-    </h4>
-    <label class="smaller_font_weight">Document 1 DRAFT 02/05/2016</label>
-    <br/>
-    <label class="smaller_font_weight">Document 2 DRAFT 10/05/2016</label>
-    <br/>
-    <label class="smaller_font_weight">Document 3 DRAFT 17/05/2016</label>
-    <br/>
-    <label class="smaller_font_weight">Document 4 DRAFT 02/06/2016</label>
-    <br/>
-    <label class="smaller_font_weight">Document 5 DRAFT 02/09/2016</label>
-    <br/>
-  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Creator</th>
+        <th>Deadline</th>
+        <th>Documents</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Flow1</td>
+        <td>User1</td>
+        <td>05/05/2016</td>
+        <td>
+          <a href="javascript:void(0);">Doc1</a>
+          <a href="javascript:void(0);">Doc2</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Flow2</td>
+        <td>User2</td>
+        <td>05/05/2016</td>
+        <td>
+          <a href="javascript:void(0);">Doc3</a>
+          <a href="javascript:void(0);">Doc2</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Flow3</td>
+        <td>User1</td>
+        <td>05/05/2016</td>
+        <td>
+          <a href="javascript:void(0);">Doc4</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Flow4</td>
+        <td>User3</td>
+        <td>05/05/2016</td>
+        <td>
+          <a href="javascript:void(0);">Doc5</a>
+          <a href="javascript:void(0);">Doc6</a>
+          <a href="javascript:void(0);">Doc7</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 </body>
