@@ -1,0 +1,64 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="css/shared.css">
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/uploadDocument.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<br/>
+<br/>
+
+
+<div class="col-md-12">
+<h2 class="text-center">
+Create a flow
+</h2>
+<br><br>
+<div class="col-md-5 col-md-offset-3">
+  <br>
+  <div class="input-group">
+  <span class="input-group-addon" id="abstract"> Enter  flow  name: </span>
+  <input type="text" id="input_abstract" class="form-control" placeholder="" aria-describedby="abstract">
+  </div>
+  <br>
+  <div class="input-group">
+  <span class="input-group-addon" id="keywords">Enter review time: </span>
+  <input type="text" id="input_keywords" class="form-control" placeholder="" aria-describedby="keywords">
+  </div>
+</div>
+<br><br><br>
+
+</div>
+<br><br><br><br><br>
+<div class="col-md-5 col-md-offset-3">
+	<br><br>
+</div>
+<div class="col-md-3 col-md-offset-4">
+    <select class="form-control">
+      <option value="volvo">Choose funding type</option>
+      <option value="saab">Funding 1</option>
+      <option value="opel">Funding 2</option>
+      <option value="audi">Funding 3</option>
+    </select>
+  </div>
+<div class="col-md-5 col-md-offset-3">
+	<br><br>
+</div>
+</div>
+<br><br><br><br><br><br>
+<div class="col-md-7">
+  <div class="col-md-offset-6">
+    <input type="button" id="upload-btn" class="btn btn-default" value="Send Request to superior" />
+  </div>
+
+</div>
+
+</div>
+
+<script>
+  console.log(localStorage.getItem("loginCredentials"));
+</script>
