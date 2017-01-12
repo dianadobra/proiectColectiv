@@ -11,13 +11,17 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script src="https://use.fontawesome.com/2b961c07ac.js"></script>
-<script src="js/uploadDocument.js"></script> 
-<script src="js/logOut.js"></script>
+
+<link rel="stylesheet" href="css/contributor.css">  
 <link rel="stylesheet" href="css/shared.css">  
+<script src="js/uploadDocument.js"></script>  
 
 <br/>
 <br/>
+
 <div class="col-md-2">
   <ul class="list-group">
   <li class="list-group-item">
@@ -30,26 +34,23 @@
     </a>
   </li>
   <li class="list-group-item">
-    <a href="adminInitiatedTask.html">Initiated tasks</a>
+    <a href="managerInitiatedTask.html">Initiated tasks</a>
   </li>
   <li class="list-group-item">
-    <a href="adminTask.html">Tasks area</a>
+    <a href="managerTask.html">Tasks area</a>
   </li>
   <li class="list-group-item">
-    <a href="adminFinistedTasks.html">Finished tasks</a>
+    <a href="managerFinishedTask.html">Finished tasks</a>
   </li>
   <li class="list-group-item">
-    <a href="javascript:void(0);">Users</a>
+    <a href="javascript:void(0);">Statistics</a>
   </li>
   <li class="list-group-item">
-    <a href="admin.html">Logs</a>
-  </li>
-  <li class="list-group-item">
-    <a href="javascript:void(0);" onclick="logOut()">Log Out</a>
+    <a href="javascript:void(0);">Log Out</a>
   </li>
 </ul>
 </div>
-
+<!--
 <div class="col-md-9">
   <h3 class="text-center title">
     Work area
@@ -60,52 +61,8 @@
     <h4>
       Choose documents to start the flow: 
     </h4>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 1 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
+    <div class = "col-md-12 document_list">
     </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 2 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 3 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 4 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <div class="input-group">
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Document 5 DRAFT 02/05/2016</label> 
-      </div>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-default">Edit</button>
-        <button type="button" class="btn btn-default">Delete</button>
-      </div>
-    </div>
-    <br/>
     <div class="pull-left">
       <button type="button" class="btn btn-default workflow_button">Start Workflow</button>
     </div>
@@ -114,12 +71,181 @@
     <h4>
       Or upload new document: 
     </h4>
-    <button type="button" 
-            class="btn btn-default upload_button" 
-            onclick="redirectToUploadPage()">Upload document
-    </button>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
   </div>
 </div>
+-->
+<div class= "col-md-9">
+  <h3 class="text-center title">
+    Work area
+  </h3>
+  
+  
+  <br/>
+
+
+  <table class="table table-striped input_table">
+  <thead>
+    <tr>
+      <th>File Name
+      <th>Abstract input
+      <th>Keywords
+      <th>Signed
+      <th>Signed by
+      <th>Document Status
+      <th>Version
+      <th>Approval Status
+      <th>Author
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+  </table>
+
+  <div class="text-center upload_doc">
+
+    <h4>
+      Or upload new document: 
+    </h4>
+    <div class="pull-left">
+      <button type="button" class="btn btn-default workflow_button">Start Workflow</button>
+    </div>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
+  </div>
+</div>
+<script>
+  var http = new XMLHttpRequest();
+  let user = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
+  console.log(user[6]);
+  var url = "http://localhost:8080/eppione/api/documents/user/" + user[6];
+  //var params = "username=" + username + "&password=" + password;
+  http.open("GET", url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+  http.send();
+  //let json = JSON.parsehttp(.responseText);
+  //console.log(http.responseText);
+
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+    if (http.readyState == 4 && http.status == 200) {
+
+      // save the response as a string in sessionStorage
+      localStorage.setItem("userFiles",JSON.stringify(http.responseText));
+      let json = JSON.parse(http.responseText);
+
+      for (var i = 0; i < json.length; i++){
+
+          if(json[i].documentState == "Final"){
+            if(json[i].signed == "false"){          
+              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='sign_document("+ json[i].id+ ")' >Sign</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
+            }else{
+              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
+
+            }
+          }
+          else{
+            $(".input_table").append("<tr><th>           " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default'  onclick='change_document_to_final("+ json[i].id+ ")' >Make Final</button></div></div> " +"</tr>");
+          }
+      }
+      //console.log(JSON.stringify(json));
+      //role = json.roles[0].name;
+      
+    }
+  }
+  
+  function change_document_to_draft(id){
+    var http = new XMLHttpRequest();
+    var url = "http://localhost:8080/eppione/api/documents/" + id + "/status?status=Draft";
+    http.open("PUT", url, true);
+
+    //Send the proper header information along with the request
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+      }
+    }
+    http.send();
+    window.location.reload(true);
+ }
+
+ function sign_document(id){
+
+    let obj = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
+    var i = 7;
+    var authorId = obj[6];
+    while(obj[i] != ',') {
+      authorId = authorId + obj[i];
+      i++;
+    }
+    var http = new XMLHttpRequest();
+    var url = "http://localhost:8080/eppione/api/documents/" + id + "/user/" + authorId + "/sign";
+    http.open("PUT", url, true);
+
+    //Send the proper header information along with the request
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+      }
+    }
+    http.send();
+    window.location.reload(true);
+ }
+
+ function change_document_to_final(id){
+    var http = new XMLHttpRequest();
+    var url = "http://localhost:8080/eppione/api/documents/" + id + "/status?status=Final";
+    http.open("PUT", url, true);
+
+    //Send the proper header information along with the request
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+      }
+    }
+    http.send();
+    window.location.reload(true);
+ }
+
+  function delete_document(id) {
+
+    var http = new XMLHttpRequest();
+    var url = "http://localhost:8080/eppione/api/documents/" + id;
+    http.open("DELETE", url, true);
+
+    //Send the proper header information along with the request
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+      }
+    }
+    http.send();
+    window.location.reload(true);
+  }
+  function download_document(id) {
+
+    window.location.href = "http://localhost:8080/eppione/api/documents/" + id;
+  }
+</script>
 
 </body>
 </html>
