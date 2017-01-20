@@ -220,9 +220,43 @@
 	        	<button type="button" class="btn btn-default">Reject</button>
 	        	<button type="button" class="btn btn-default">Needs Revision</button>
       		</div>
+      		
 		</div>
 	</div>
+	<div class="trial">
+      			
+    </div>
 </div>
+<script id="template" type="text/x-handlebars-template">
+  <p>Use the <strong>{{id}}</strong>, Mircea!</p>
+</script>
+
+<script src="js/handlebars.js"></script>
+
+<script>
+	let obj = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
+    var i = 7;
+    var id = obj[6];
+    while(obj[i] != ',') {
+      id = id + obj[i];
+      i++;
+    }
+    
+    //Grab the inline template
+	var template = document.getElementById('template').innerHTML;
+
+	//Compile the template
+	var compiled_template = Handlebars.compile(template);
+
+	//Render the data into the template
+	var rendered = compiled_template({id: id});
+
+	//Overwrite the contents of #target with the renderer HTML
+	$(".trial").append(rendered);
+</script>
+
+
+
 
 </body>
 </html>

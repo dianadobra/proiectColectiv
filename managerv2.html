@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script src="https://use.fontawesome.com/2b961c07ac.js"></script>
+
+<link rel="stylesheet" href="css/contributor.css">  
+<link rel="stylesheet" href="css/shared.css">  
+<script src="js/uploadDocument.js"></script>  
+
+<br/>
+<br/>
+
+<div class="col-md-2">
+  <ul class="list-group">
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Welcome</a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">
+      Work area
+    </a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Initiated tasks area</a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Tasks area</a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Finished tasks area</a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Statistics</a>
+  </li>
+  <li class="list-group-item">
+    <a href="javascript:void(0);">Log Out</a>
+  </li>
+</ul>
+</div>
+<!--
+<div class="col-md-9">
+  <h3 class="text-center title">
+    Work area
+  </h3>
+  <br/>
+  <br/>
+  <div class="col-md-7">
+    <h4>
+      Choose documents to start the flow: 
+    </h4>
+    <div class = "col-md-12 document_list">
+    </div>
+    <div class="pull-left">
+      <button type="button" class="btn btn-default workflow_button">Start Workflow</button>
+    </div>
+  </div>
+  <div class="col-md-5">
+    <h4>
+      Or upload new document: 
+    </h4>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
+  </div>
+</div>
+-->
+<div class= "col-md-9">
+  <h3 class="text-center title">
+    Work area
+  </h3>
+  
+  
+  <br/>
+
+
+  <table class="table table-striped input_table">
+  <thead>
+    <tr>
+      <th>Name
+      <th>Abstract input
+      <th>Keywords
+      <th>Signed
+      <th>Signed by
+      <th>Document State
+      <th>Version
+      <th>Approval Status
+      <th>Username
+      <th>Signed by name
+    </tr>
+  </thead>
+  <tbody>
+
+  </tbody>
+  </table>
+
+  <div class="text-center upload_doc">
+    <h4>
+      Or upload new document: 
+    </h4>
+    <a href="uploadDocument.html">
+      <button type="button" 
+              class="btn btn-default upload_button" >Upload document
+      </button>
+    </a>
+  </div>
+</div>
+<script>
+  var http = new XMLHttpRequest();
+  let user = jQuery.parseJSON(sessionStorage.getItem("loginCredentials"));
+  console.log(user[6]);
+  var url = "http://localhost:8080/eppione/api/documents/user/" + user[6];
+  //var params = "username=" + username + "&password=" + password;
+  http.open("GET", url, true);
+
+  //Send the proper header information along with the request
+  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  
+  http.send();
+  //let json = JSON.parsehttp(.responseText);
+  //console.log(http.responseText);
+
+
+  http.onreadystatechange = function() {//Call a function when the state changes.
+    if (http.readyState == 4 && http.status == 200) {
+
+      // save the response as a string in sessionStorage
+      sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
+      let json = JSON.parse(http.responseText);
+
+      for (var i = 0; i < json.length; i++){
+
+          
+          $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedBy + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username + "<th>" + json[i].signedByName +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default'>Delete</button></div></div> " +"</tr>");
+      }
+      //console.log(JSON.stringify(json));
+      //role = json.roles[0].name;
+
+      
+    }
+  }
+</script>
+
+</body>
+</html>
