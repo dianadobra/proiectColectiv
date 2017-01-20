@@ -59,181 +59,72 @@
 	</h3>
 	<br/>
 	<br/>
-	<div class="col-md-5">
-		<div class="input-group">
-				<div class="panel-group">
-				    
-				        <div>
-					        <h4>
-					          	<a data-toggle="collapse" data-parent="#accordion" data-target="#collapse1">
-					          		<i class="glyphicon glyphicon-expand" aria-hidden="true"></i>
-					          		Flow1
-					          	</a>
-					        </h4>
-				        </div>
-				        <div id="collapse1" class="panel-collapse collapse">
-					        <div class="panel-heading">	
-					            <h5>
-					        		<a data-toggle="collapse" data-target="#collapse2">
-					        			<i class="glyphicon glyphicon-collapse-down" aria-hidden="true"></i>
-					        			Document1
-					        		</a>
-					        	</h5>
-					        </div>
-					        <div id="collapse2" class="panel-collapse collapse">
-					        	<div class="panel-heading">
-						        	<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			View
-						        		</a>
-						        	</div> 
-						      		<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			Edit
-						        		</a>
-						        	</div>
-						        	<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			Delete
-						        		</a>
-						        	</div> 
-						      	</div>
-					        </div>
-					        <div class="panel-heading">	
-					            <h5>
-					        		<a data-toggle="collapse" data-target="#collapse3">
-					        			<i class="glyphicon glyphicon-collapse-down" aria-hidden="true"></i>
-					        			Document2
-					        		</a>
-					        	</h5>
-					        </div>
-					        <div id="collapse3" class="panel-collapse collapse">
-					        	<div class="panel-heading">
-						        	<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			View
-						        		</a>
-						        	</div> 
-						      		<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			Edit
-						        		</a>
-						        	</div>
-						        	<div>
-						        		<a href="">
-						        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						        			Delete
-						        		</a>
-						        	</div> 
-						      	</div>
-					        </div>
-				        </div>
-			  	</div>
-			  	<div class="input-group-btn">
-	        		<button type="button" class="btn btn-default">Approve</button>
-	        		<button type="button" class="btn btn-default">Reject</button>
-	        		<button type="button" class="btn btn-default">Needs Revision</button>
-      			</div>
-	  	</div>
-	  	<div class="input-group">
-		  	<div class="panel-group">
+	<div class="col-md-5 flow_area">
+	</div>
+</div>
+<script id="flow_partial" type="text/x-handlebars-template">
+  <div class="input-group">
+			<div class="panel-group">
 			    
-			    <div>
-			        <h4>
-			          	<a data-toggle="collapse" data-parent="#accordion" data-target="#collapse4">
-			          		<i class="glyphicon glyphicon-expand" aria-hidden="true"></i>
-			          		Flow2
-			          	</a>
-			        </h4>
-			    </div>
-			    <div id="collapse4" class="panel-collapse collapse">
-			        <div class="panel-heading">	
-			            <h5>
-			        		<a data-toggle="collapse" data-target="#collapse5">
-			        			<i class="glyphicon glyphicon-collapse-down" aria-hidden="true"></i>
-			        			Document1
-			        		</a>
-			        	</h5>
+			        <div>
+				        <h4>
+				          	<a data-toggle="collapse" data-parent="#accordion" data-target="#{{id}}">
+				          		<i class="glyphicon glyphicon-expand" aria-hidden="true"></i>
+				          		{{flow_name}}
+				          	</a>
+				        </h4>
 			        </div>
-			        <div id="collapse5" class="panel-collapse collapse">
-			        	<div class="panel-heading">
-						    <div>
-						    	<a href="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		View
-						    	</a>
-						    </div> 
-						    <div>
-						    	<a href="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		Edit
-						    	</a>
-						    </div>
-						    <div>
-						    	<a href="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		Delete
-						    	</a>
-						    </div> 
-						</div>
+			        <div id={{id}} class="panel-collapse collapse">
+				        
+				        
 			        </div>
-			        <div class="panel-heading">	
-			            <h5>
-			        		<a data-toggle="collapse" data-target="#collapse6">
-			        			<i class="glyphicon glyphicon-collapse-down" aria-hidden="true"></i>
-			        			Document2
-			        		</a>
-			        	</h5>
-			        </div>
-			        <div id="collapse6" class="panel-collapse collapse">
-			        	<div class="panel-heading">
-						    <div>
-						    	<a type="checkbox" value="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		View
-						    	</a>
-						    </div> 
-						    <div>
-						    	<a type="checkbox" value="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		Edit
-						    	</a>
-						    </div>
-						    <div>
-						    	<a type="checkbox" value="">
-						    		<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
-						    		Delete
-						    	</a>
-						    </div> 
-						</div>
-			        </div>
-			      </div>
-			    
 		  	</div>
 		  	<div class="input-group-btn">
-	        	<button type="button" class="btn btn-default">Approve</button>
-	        	<button type="button" class="btn btn-default">Reject</button>
-	        	<button type="button" class="btn btn-default">Needs Revision</button>
-      		</div>
-      		
-		</div>
-	</div>
-	<div class="trial">
-      			
-    </div>
-</div>
-<script id="template" type="text/x-handlebars-template">
-  <p>Use the <strong>{{id}}</strong>, Mircea!</p>
+        		<button type="button" class="btn btn-default">Approve</button>
+        		<button type="button" class="btn btn-default">Reject</button>
+        		<button type="button" class="btn btn-default">Needs Revision</button>
+  			</div>
+  	</div>
+</script>
+
+
+<script  id="document_partial" type="text/x-handlebars-template">
+	        <div class="panel-heading">	
+	            <h5>
+	        		<a data-toggle="collapse" data-target="#doc_{{id}}">
+	        			<i class="glyphicon glyphicon-collapse-down" aria-hidden="true"></i>
+	        			{{document_name}}
+	        		</a>
+	        	</h5>
+	        </div>
+	        <div id="doc_{{id}}" class="panel-collapse collapse">
+	        	<div class="panel-heading">
+		        	<div>
+		        		<a href="">
+		        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
+		        			View
+		        		</a>
+		        	</div> 
+		      		<div>
+		        		<a href="">
+		        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
+		        			Edit
+		        		</a>
+		        	</div>
+		        	<div>
+		        		<a href="">
+		        			<i class="glyphicon glyphicon-unchecked" aria-hidden="true"></i>
+		        			Delete
+		        		</a>
+		        	</div> 
+		      	</div>
+	        </div>
 </script>
 
 <script src="js/handlebars.js"></script>
 
 <script>
+	var http = new XMLHttpRequest();
 	let obj = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
     var i = 7;
     var id = obj[6];
@@ -241,18 +132,60 @@
       id = id + obj[i];
       i++;
     }
+
+    var url = "http://localhost:8080/eppione/api/flow/user/" + id;
+	  //var params = "username=" + username + "&password=" + password;
+	  http.open("GET", url, true);
+
+	  //Send the proper header information along with the request
+	  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  
+	  http.send();
+	  //let json = JSON.parsehttp(.responseText);
+	  //console.log(http.responseText);
+
+
+	  http.onreadystatechange = function() {//Call a function when the state changes.
+	    if (http.readyState == 4 && http.status == 200) {
+
+	      // save the response as a string in sessionStorage
+	      sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
+	      let json = JSON.parse(http.responseText);
+
+	      for (var i = 0; i < json.length; i++){
+	      	//Grab the inline template
+			var template = document.getElementById('flow_partial').innerHTML;
+
+			//Compile the template
+			var compiled_template = Handlebars.compile(template);
+
+			//Render the data into the template
+			var rendered = compiled_template({id:json[i].id, flow_name: json[i].name});
+
+			//Overwrite the contents of #target with the renderer HTML
+			$(".flow_area").append(rendered);
+
+			for (var j=0; j < json[i].documents.length; j++){
+				var doc = json[i].documents[j];
+				var template = document.getElementById('document_partial').innerHTML;
+
+				//Compile the template
+				var compiled_template = Handlebars.compile(template);
+
+				//Render the data into the template
+				var rendered = compiled_template({id:doc.id, document_name: doc.name});
+
+				//Overwrite the contents of #target with the renderer HTML
+				$("#" + json[i].id).append(rendered);
+			}
+	      }
+	      //console.log(JSON.stringify(json));
+	      //role = json.roles[0].name;
+
+	      
+	    }
+	}
     
-    //Grab the inline template
-	var template = document.getElementById('template').innerHTML;
-
-	//Compile the template
-	var compiled_template = Handlebars.compile(template);
-
-	//Render the data into the template
-	var rendered = compiled_template({id: id});
-
-	//Overwrite the contents of #target with the renderer HTML
-	$(".trial").append(rendered);
 </script>
 
 
