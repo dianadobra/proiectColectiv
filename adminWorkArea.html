@@ -145,7 +145,7 @@
       // save the response as a string in sessionStorage
       localStorage.setItem("userFiles",JSON.stringify(http.responseText));
       let json = JSON.parse(http.responseText);
-      console.log(json[0].keywords);
+      
       for (var i = 0; i < json.length; i++){
 
           if(json[i].documentState == "Final"){
@@ -160,9 +160,6 @@
             $(".input_table").append("<tr><th>           " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default' onclick='edit_document(\"" +json[i].id + "\",\""  + json[i].keywords + "\",\"" + json[i].abstractInput + "\")'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default'  onclick='change_document_to_final("+ json[i].id+ ")' >Make Final</button></div></div> " +"</tr>");
           }
       }
-      console.log(JSON.stringify(json));
-      //role = json.roles[0].name;
-      
     }
   }
 
@@ -249,7 +246,6 @@
   }
 
   function download_document(id) {
-
     window.location.href = "http://localhost:8080/eppione/api/documents/" + id;
   }
 </script>
