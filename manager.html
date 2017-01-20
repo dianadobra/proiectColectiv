@@ -93,6 +93,7 @@
   <thead>
     <tr>
       <th>File Name
+      <th>GUID
       <th>Abstract input
       <th>Keywords
       <th>Signed
@@ -151,7 +152,7 @@
       for (var i = 0; i < json.length; i++){
 
           
-          $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button></div></div> " +"</tr>");
+          $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name + "<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button></div></div> " +"</tr>");
       }
       //console.log(JSON.stringify(json));
       //role = json.roles[0].name;
