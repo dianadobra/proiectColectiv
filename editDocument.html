@@ -6,9 +6,9 @@
 <link rel="stylesheet" href="css/shared.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="js/uploadDocument.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="js/uploadDocument.js"></script>
+<script src="js/editDocument.js"></script>
 <br/>
 <br/>
 
@@ -48,7 +48,7 @@ Edit a document
 <br><br><br>
 <div class="col-md-7">
   <div class="col-md-offset-12">
-    <input type="button" id="upload-btn" class="btn btn-default" value="Edit" />
+    <input type="button" id="upload-btn" class="btn btn-default" value="Edit" onclick="editDocument()" />
   </div>
 
 </div>
@@ -56,5 +56,5 @@ Edit a document
 </div>
 
 <script>
-  console.log(localStorage.getItem("loginCredentials"));
+  populateInputs();
 </script>

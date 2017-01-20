@@ -127,7 +127,6 @@
 <script>
   var http = new XMLHttpRequest();
   let user = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
-  console.log(user[6]);
   var url = "http://localhost:8080/eppione/api/documents/user/" + user[6];
   //var params = "username=" + username + "&password=" + password;
   http.open("GET", url, true);
@@ -146,25 +145,30 @@
       // save the response as a string in sessionStorage
       localStorage.setItem("userFiles",JSON.stringify(http.responseText));
       let json = JSON.parse(http.responseText);
-
+      console.log(json[0].keywords);
       for (var i = 0; i < json.length; i++){
 
           if(json[i].documentState == "Final"){
             if(json[i].signed == "false"){          
-              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='sign_document("+ json[i].id+ ")' >Sign</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
+              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default' onclick='edit_document(\"" +json[i].id + "\",\""  + json[i].keywords + "\",\"" + json[i].abstractInput + "\")'>Edit</button><button type='button' class='btn btn-default' onclick='sign_document("+ json[i].id+ ")' >Sign</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
             }else{
-              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
+              $(".input_table").append("<tr><th>    <div class='input-group'><div class='checkbox'><label><input type='checkbox' value=''>       " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default' onclick='edit_document(\"" +json[i].id + "\",\""  + json[i].keywords + "\",\"" + json[i].abstractInput + "\")'>Edit</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default' onclick='change_document_to_draft("+ json[i].id+ ")' >Make Draft</button></div></div> " +"</tr>");
 
             }
           }
           else{
-            $(".input_table").append("<tr><th>           " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default'  onclick='change_document_to_final("+ json[i].id+ ")' >Make Final</button></div></div> " +"</tr>");
+            $(".input_table").append("<tr><th>           " + json[i].name +"<th>" + json[i].guid + "<th>" + json[i].abstractInput + "<th>" + json[i].keywords + "<th>" + json[i].signed + "<th>" + json[i].signedByName + "<th>" + json[i].documentState + "<th>" + json[i].version + "<th>" + json[i].approvalStatus + "<th>" + json[i].username +"<th><div class='input-group-btn'><button type='button' class='btn btn-default' onclick='edit_document(\"" +json[i].id + "\",\""  + json[i].keywords + "\",\"" + json[i].abstractInput + "\")'>Edit</button><button type='button' class='btn btn-default' onclick='delete_document("+ json[i].id+ ")'>Delete</button><button type='button' class='btn btn-default' onclick='download_document("+ json[i].id+ ")'>Download</button><button  type='button' class='btn btn-default'  onclick='change_document_to_final("+ json[i].id+ ")' >Make Final</button></div></div> " +"</tr>");
           }
       }
-      //console.log(JSON.stringify(json));
+      console.log(JSON.stringify(json));
       //role = json.roles[0].name;
       
     }
+  }
+
+  function edit_document(id, keywords, abstractInput) {
+    window.location.href = "http://localhost:8888/proiectColectivFront/editDocument.html?id=" 
+                            + id + "&keywords=" + keywords + "&abstract=" + abstractInput;
   }
   
   function change_document_to_draft(id){
@@ -243,6 +247,7 @@
     http.send();
     window.location.reload(true);
   }
+
   function download_document(id) {
 
     window.location.href = "http://localhost:8080/eppione/api/documents/" + id;
