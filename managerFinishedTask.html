@@ -51,12 +51,13 @@
 </ul>
 </div>
 
-<div class="col-md-10">
+<div class="col-md-9">
   <h3 class="text-center title">
     Finished tasks area
   </h3>
   <br/>
   <br/>
+ 
   <table class="table table-hover">
     <thead>
       <tr>
@@ -66,46 +67,94 @@
         <th>Documents</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>Flow1</td>
-        <td>User1</td>
-        <td>05/05/2016</td>
-        <td>
-          <a href="javascript:void(0);">Doc1</a>
-          <a href="javascript:void(0);">Doc2</a>
-        </td>
-      </tr>
-      <tr>
-        <td>Flow2</td>
-        <td>User2</td>
-        <td>05/05/2016</td>
-        <td>
-          <a href="javascript:void(0);">Doc3</a>
-          <a href="javascript:void(0);">Doc2</a>
-        </td>
-      </tr>
-      <tr>
-        <td>Flow3</td>
-        <td>User1</td>
-        <td>05/05/2016</td>
-        <td>
-          <a href="javascript:void(0);">Doc4</a>
-        </td>
-      </tr>
-      <tr>
-        <td>Flow4</td>
-        <td>User3</td>
-        <td>05/05/2016</td>
-        <td>
-          <a href="javascript:void(0);">Doc5</a>
-          <a href="javascript:void(0);">Doc6</a>
-          <a href="javascript:void(0);">Doc7</a>
-        </td>
-      </tr>
+
+    
+    <tbody class="flow_area">
     </tbody>
   </table>
 </div>
 
+<script src="js/handlebars.js"></script>
+
+
+<script id="finsihed_tasks" type="text/x-handlebars-template" data-target="#{{id}}">
+    
+      <tr>
+        <th> {{flow.name}}
+        <th> {{flow.creator}}
+        <th> {{flow.deadline}}
+        <th id={{id}}> 
+      </tr>
+    
+    </script>
+<script id="document_list" type="text/x-handlebars-template">
+
+<a data-target="#doc_{{id}}" href={{document_d}}>{{document_name}}</a>
+
+
+</script>
+
+
+
+<script>
+  var http = new XMLHttpRequest();
+  let obj = jQuery.parseJSON(localStorage.getItem("loginCredentials"));
+    var i = 7;
+    var id = obj[6];
+    while(obj[i] != ',') {
+      id = id + obj[i];
+      i++;
+    }
+
+    var url = "http://localhost:8080/eppione/api/flow/user/" + id;
+    //var params = "username=" + username + "&password=" + password;
+    http.open("GET", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.send();
+    //let json = JSON.parsehttp(.responseText);
+    //console.log(http.responseText);
+
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+        sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
+        let json = JSON.parse(http.responseText);
+        console.log(json);
+        for (var i = 0; i < json.length; i++){
+          //Grab the inline template
+      var template = document.getElementById('finsihed_tasks').innerHTML;
+
+      //Compile the template
+      var compiled_template = Handlebars.compile(template);
+
+      //Render the data into the template
+      var rendered = compiled_template({ id:json[i].id, flow: json[i]});
+      $(".flow_area").append(rendered);
+
+      for(var j=0; j< json[i].documents.length; j++){
+        var doc = json[i].documents[j];
+        var template = document.getElementById('document_list').innerHTML;
+        var compiled_template = Handlebars.compile(template);
+        var rendered = compiled_template({document_name: doc.name, document_d : doc.downloadUrl});
+        console.log(doc.name)
+        $("#" + json[i].id).append(rendered);
+      }
+
+
+      
+        }
+        //console.log(JSON.stringify(json));
+        //role = json.roles[0].name;
+
+        
+      }
+  }
+    
+</script>
 </body>
 </html>
