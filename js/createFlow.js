@@ -71,9 +71,11 @@
         contentType: 'application/json',
         data: JSON.stringify(flowData),
         success: function() {
-            console.log("Send");
+            alert("Request successfully sent!");
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("Error: " + errorThrown);
         }
-
     });
   }
 
