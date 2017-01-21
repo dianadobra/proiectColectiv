@@ -190,12 +190,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
  }
 
  function change_document_to_final(id){
@@ -207,12 +206,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
  }
 
   function delete_document(id) {
@@ -225,12 +223,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+         window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
   }
 
   function download_document(id) {

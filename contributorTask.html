@@ -257,12 +257,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
   }
   function edit_document(id) {
     window.location.href = "http://localhost:8888/proiectColectivFront/editDocument.html?id=" 
@@ -287,12 +286,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
   }
 
   function setStatusApproved(id){
@@ -313,12 +311,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
  }
 
  function setStatusUnapproved(id){
@@ -339,12 +336,11 @@
 
     http.onreadystatechange = function() {//Call a function when the state changes.
       if (http.readyState == 4 && http.status == 200) {
-
+            window.location.reload(true);
         // save the response as a string in sessionStorage
       }
     }
     http.send();
-    window.location.reload(true);
  }
 </script>
 
