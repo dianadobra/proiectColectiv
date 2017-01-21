@@ -98,7 +98,7 @@
   </div>
 
   <script  id="document_row" type="text/x-handlebars-template">
-        <tr>
+        <tr id="table_of_items">
           <td>{{document.userName}}</td>
           <td>{{document.action}}</td>
           <td>{{document.entity}}</td>
@@ -148,7 +148,7 @@
     function filter(){
       var http = new XMLHttpRequest();
       var url = "http://localhost:8080/eppione/api/logs/filter";
-
+      
       var userId = getUserID();
       var logAction = $('#action_select').val();
       var logEntity = $('#entity_select').val();
@@ -158,11 +158,11 @@
       if (logAction != '') {
         url += "&logAction=" + logAction;
       }
-
+      
       if (logEntity != '') {
         url += "&logEntity=" + logEntity;
       }
- 
+
       http.open("GET", url, true);
 
       //Send the proper header information along with the request
@@ -175,11 +175,14 @@
           // save the response as a string in sessionStorage
           sessionStorage.setItem("userFiles", JSON.stringify(http.responseText));
           let json = JSON.parse(http.responseText);
-          
+          console.log(json);
+          for (var i = 0; i < 100; i++){
+            $('#table_of_items').remove();
+          }
+
           for (var i = 0; i < json.length; i++){
               //Grab the inline template
             var template = document.getElementById('document_row').innerHTML;
-            console.log(template);
             //Compile the template
             var compiled_template = Handlebars.compile(template);
 
