@@ -8,7 +8,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/uploadDocument.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script src="js/createFlow.js"></script>
+<script src="js/getUserID.js"></script>
 <br/>
 <br/>
 
@@ -38,7 +39,7 @@ Create a flow
 	<br><br>
 </div>
 <div class="col-md-3 col-md-offset-4">
-    <select class="form-control">
+    <select id="fundingSelect" class="form-control">
     </select>
   </div>
 <div class="col-md-5 col-md-offset-3">
@@ -48,14 +49,9 @@ Create a flow
 <br><br><br><br><br><br>
 <div class="col-md-7">
   <div class="col-md-offset-6">
-    <input type="button" id="upload-btn" class="btn btn-default" value="Send Request to superior" />
+    <input type="button" id="upload-btn" class="btn btn-default" value="Send Request to superior" onclick="startWorkFlow()" />
   </div>
 
 </div>
 
 </div>
-
-<script>
-  console.log(localStorage.getItem("loginCredentials"));
-</script>
- <script src="js/createFlow.js"></script>

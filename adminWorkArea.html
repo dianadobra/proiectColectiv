@@ -14,10 +14,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script src="https://use.fontawesome.com/2b961c07ac.js"></script>
- 
+
+<link rel="stylesheet" href="css/contributor.css">  
 <link rel="stylesheet" href="css/shared.css">  
 <script src="js/uploadDocument.js"></script>
-<script src="js/logOut.js"></script>   
+<script src="js/logOut.js"></script> 
+<script src="js/getUserID.js"></script>
+<script src="js/createFlow.js"></script>   
 
 <br/>
 <br/>
@@ -25,7 +28,7 @@
 <div class="col-md-2">
   <ul class="list-group">
   <li class="list-group-item">
-    <a href="javascript:void(0);">Welcome</a>
+    <a href="welcome.html">Welcome</a>
   </li>
   <li class="list-group-item">
     <a href="javascript:void(0);">
@@ -88,7 +91,7 @@
   <br/>
 
 
-  <table class="table table-striped input_table">
+  <table id="input_table" class="table table-striped input_table">
   <thead>
     <tr>
       <th>File Name
@@ -114,9 +117,9 @@
       Or upload new document: 
     </h4>
     <div class="pull-left">
-      <a href="createFlow.html">
-        <button type="button" class="btn btn-default workflow_button">Start Workflow</button>
-      </a>
+      
+        <button type="button" class="btn btn-default workflow_button" onclick="setSelectedFileIds('input_table')">Start Workflow</button>
+      
     </div>
     <a href="uploadDocument.html">
       <button type="button" 
@@ -144,7 +147,7 @@
     if (http.readyState == 4 && http.status == 200) {
 
       // save the response as a string in sessionStorage
-      localStorage.setItem("userFiles",JSON.stringify(http.responseText));
+      localStorage.setItem("userFiles", http.responseText);
       let json = JSON.parse(http.responseText);
       
       for (var i = 0; i < json.length; i++){

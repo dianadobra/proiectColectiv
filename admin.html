@@ -6,9 +6,10 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://use.fontawesome.com/2b961c07ac.js"></script>
-<script src="js/logOut.js"></script> 
+<script src="js/logOut.js"></script>
+<script src="js/getUserID.js"></script> 
 <link rel="stylesheet" href="css/shared.css">  
 
 <br/>
@@ -17,7 +18,7 @@
 <div class="col-md-2">
   <ul class="list-group">
   <li class="list-group-item">
-    <a href="javascript:void(0);">Welcome</a>
+    <a href="welcome.html">Welcome</a>
   </li>
   <li class="list-group-item">
     <a href="adminWorkArea.html">Work area</a>
@@ -43,56 +44,41 @@
 </ul>
 </div>
 
-<div class="col-md-9">
+<div class="col-md-10">
   <h3 class="text-center title">
     Logs
   </h3>
   <br/>
   <br/>
   <div class="col-md-2">
-    <select class="form-control">
-      <option value="volvo">User</option>
-      <option value="saab">Saab</option>
-      <option value="opel">Opel</option>
-      <option value="audi">Audi</option>
+    <select id="user_select" class="form-control">
     </select>
   </div>
   <div class="col-md-2">
-    <select class="form-control">
-      <option value="volvo">Department</option>
-      <option value="saab">Saab</option>
-      <option value="opel">Opel</option>
-      <option value="audi">Audi</option>
+    <select id="entity_select" class="form-control">
+      <option value="">Entity</option>
+      <option value="Document">Document</option>
+      <option value="Flow">Flow</option>
     </select>
   </div>
   <div class="col-md-2">
-    <select class="form-control">
-      <option value="volvo">Date</option>
-      <option value="saab">Saab</option>
-      <option value="opel">Opel</option>
-      <option value="audi">Audi</option>
+    <select id="action_select" class="form-control">
+      <option value="">Action</option>
+      <option value="Create">Create</option>
+      <option value="Ppdate">Update</option>
+      <option value="Delete">Delete</option>
+      <option value="PrepareForDelete">Prepare for delete</option>
+      <option value="Upload">Upload</option>
+      <option value="ChangeStatus">Change status</option>
     </select>
   </div>
   <div class="col-md-2">
-    <select class="form-control">
-      <option value="volvo">Doc Type</option>
-      <option value="saab">Saab</option>
-      <option value="opel">Opel</option>
-      <option value="audi">Audi</option>
-    </select>
+    <button type="button" class="btn btn-default" onclick="filter()">Filter</button>
   </div>
-  <div class="col-md-2">
-    <select class="form-control">
-      <option value="volvo">Info Type</option>
-      <option value="saab">Saab</option>
-      <option value="opel">Opel</option>
-      <option value="audi">Audi</option>
-    </select>
-  </div>
-  <div class="col-md-2">
-    <button type="button" class="btn btn-default">Filter</button>
-  </div>
-
+  <br>
+  <br>
+  <br>
+  <br>
   <div class= "col-md-12">
     <table class="table table-striped">
     <thead>
@@ -105,16 +91,109 @@
         <th>Date</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>John Doe</td>
-        <td>Added</td>
-        <td>Document</td>
-        <td>Document1</td>
-        <td>bla bla</td>
-        <td>21/12/2016</td>
-      </tr>
+    <tbody class="tablebody">
+
     </tbody>
   </table>
   </div>
+
+  <script  id="document_row" type="text/x-handlebars-template">
+        <tr>
+          <td>{{document.userName}}</td>
+          <td>{{document.action}}</td>
+          <td>{{document.entity}}</td>
+          <td>{{document.entityType}}</td>
+          <td>{{document.description}}</td>
+          <td>{{document.date}}</td>
+        </tr>
+  </script>
+
+  <script src="js/handlebars.js"></script>
+  
+  <script>
+    var http = new XMLHttpRequest();
+    let user = jQuery.parseJSON(sessionStorage.getItem("loginCredentials"));
+    var url = "http://localhost:8080/eppione/api/users";
+    //var params = "username=" + username + "&password=" + password;
+    http.open("GET", url, true);
+
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.send();
+    //let json = JSON.parsehttp(.responseText);
+    //console.log(http.responseText);
+
+
+    http.onreadystatechange = function() {//Call a function when the state changes.
+      if (http.readyState == 4 && http.status == 200) {
+
+        // save the response as a string in sessionStorage
+        sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
+        let json = JSON.parse(http.responseText);
+
+        $.each(json, function (i, item) {
+            $('#user_select').append($('<option>', { 
+                value: item.id,
+                text : item.firstName + " " + item.lastName 
+            }));
+        });
+        //console.log(JSON.stringify(json));
+        //role = json.roles[0].name;
+
+        
+      }
+    }
+
+    function filter(){
+      var http = new XMLHttpRequest();
+      var url = "http://localhost:8080/eppione/api/logs/filter";
+
+      var userId = getUserID();
+      var logAction = $('#action_select').val();
+      var logEntity = $('#entity_select').val();
+
+      url += "?userId=" + parseInt(userId);
+      
+      if (logAction != '') {
+        url += "&logAction=" + logAction;
+      }
+
+      if (logEntity != '') {
+        url += "&logEntity=" + logEntity;
+      }
+ 
+      http.open("GET", url, true);
+
+      //Send the proper header information along with the request
+      http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+      http.onreadystatechange = function() {//Call a function when the state changes. 
+        if (http.readyState == 4 && http.status == 200) {
+
+          // save the response as a string in sessionStorage
+          sessionStorage.setItem("userFiles", JSON.stringify(http.responseText));
+          let json = JSON.parse(http.responseText);
+          
+          for (var i = 0; i < json.length; i++){
+              //Grab the inline template
+            var template = document.getElementById('document_row').innerHTML;
+            console.log(template);
+            //Compile the template
+            var compiled_template = Handlebars.compile(template);
+
+            //Render the data into the template
+            var rendered = compiled_template({document:json[i]});
+
+            //Overwrite the contents of #target with the renderer HTML
+            $(".tablebody").append(rendered);
+          }
+        }
+      }
+
+      http.send();
+
+    }
+  </script>
 </div>
