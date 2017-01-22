@@ -132,15 +132,13 @@
         sessionStorage.setItem("userFiles",JSON.stringify(http.responseText));
         let json = JSON.parse(http.responseText);
 
-        $.each(json, function (i, item) {
-            $('#user_select').append($('<option>', { 
-                value: item.id,
-                text : + item.firstName + " " + item.lastName 
-            }));
+        for (var i = 0; i < json.length; i++){
 
-        });
+          $('#user_select').append("<option value='" + json[i].id + "'>" + json[i].firstName + " " + json[i].lastName + "</option>");
+
+        }
+
         
-        //role = json.roles[0].name;
       }
     }
 
@@ -148,7 +146,7 @@
       var http = new XMLHttpRequest();
       var url = "http://localhost:8080/eppione/api/logs/filter";
       
-      var userId = getUserID();
+      var userId = $('#user_select').val();
       console.log(userId);
       var logAction = $('#action_select').val();
       var logEntity = $('#entity_select').val();
