@@ -135,13 +135,12 @@
         $.each(json, function (i, item) {
             $('#user_select').append($('<option>', { 
                 value: item.id,
-                text : item.firstName + " " + item.lastName 
+                text : + item.firstName + " " + item.lastName 
             }));
-        });
-        //console.log(JSON.stringify(json));
-        //role = json.roles[0].name;
 
+        });
         
+        //role = json.roles[0].name;
       }
     }
 
@@ -150,6 +149,7 @@
       var url = "http://localhost:8080/eppione/api/logs/filter";
       
       var userId = getUserID();
+      console.log(userId);
       var logAction = $('#action_select').val();
       var logEntity = $('#entity_select').val();
 
